@@ -4,7 +4,8 @@ let reset=document.querySelector("#reset");
 let hour= document.querySelector("#hour");
 let minute= document.querySelector("#minute");
 let seconds= document.querySelector("#seconds");
-
+let height=150;
+let width=300;
 let time=[0,0,0];
 let timerid=0;
 start.addEventListener("click",function(){
@@ -15,17 +16,21 @@ start.addEventListener("click",function(){
     start.classList.add("disable");
     timerid=setInterval(()=>{
         time[2]++;
+        make3();
         if(time[2]==60)
-        {
+        {   
             time[1]++;
             time[2]=0;
+            make2();
+            c3.clearRect(0,0,width,height);
         }
         if(time[1]==60)
-        {
+        { 
             time[0]++;
             time[1]=0;
+            make();
+            c2.clearRect(0,0,width,height);
         }
-        console.log(time);
         display_time();
     },1000);
 });
@@ -37,7 +42,9 @@ stop.addEventListener("click",function()
 })
 
 reset.addEventListener("click",function()
-{
+{  c.clearRect(0,0,width,height);
+    c2.clearRect(0,0,width,height);
+    c3.clearRect(0,0,width,height);
     start.classList.remove("disable");
     stop.classList.remove("disable");
   clearInterval(timerid);
@@ -56,33 +63,49 @@ seconds.innerText=time[2].toString().padStart(2,"0");
 
 
 
+let radius =5;
 
-let canvas1=document.querySelector('canvas');
-function make ()
-{let c=canvas.getContext('2d');
-c.strokeStyle="#de0a0aff";
-let i=2,j=2;
-let height=150;
-let width=300;
+let canvas1=document.querySelector("#hours");
+let c=canvas1.getContext('2d');
+c.strokeStyle="#ffffffff";
+
+let canvas2=document.querySelector("#minutes");
+let c2=canvas2.getContext('2d');
+c2.strokeStyle="#ffffffff";
+
+let canvas3=document.querySelector("#second");
+let c3=canvas3.getContext('2d');
+c3.strokeStyle="#ffffffff";
+
+color=["#de0a0aff","#3cff00ff","#0ad7debd","#9e0adeff","#d7de0aff","#0a46deff"
+];
+let i=0;
+function make()
+{ i=Math.floor(Math.random()*6);
+c.beginPath();
 let x=Math.random()*width,y=Math.random()*height;
-function repeat()
-{ 
-  requestAnimationFrame(repeat);
-c.clearRect(0,0,width,height);
-c.beginPath()*width;
-
-c.arc(x,y,5,Math.PI*2,0);
-c.stroke(); 
-if(x+5>width||x-5<0)
-{    i=-i;
+c.arc(x,y,radius,Math.PI*2,0);
+c.stroke();
+c.fillStyle=color[i];
+c.fill();
 }
 
-if(y+5>height||y-5<0)
-{
-    j=-j;
+function make2()
+{i=Math.floor(Math.random()*6);
+c2.beginPath();
+let x=Math.random()*width,y=Math.random()*height;
+
+c2.arc(x,y,radius,Math.PI*2,0);
+c2.stroke();
+c2.fillStyle=color[i]
+c2.fill();
 }
-y+=j;
-x+=i;
+function make3()
+{i=Math.floor(Math.random()*6);
+c3.beginPath();
+let x=Math.random()*width,y=Math.random()*height;
+c3.arc(x,y,radius,Math.PI*2,0);
+c3.stroke();
+c3.fillStyle=color[i];
+c3.fill();
 }
-}
-repeat();

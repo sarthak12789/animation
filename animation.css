@@ -4,6 +4,9 @@
     padding:0;
     box-sizing:border-box;
 }
+body{
+    background-color: rgba(11, 121, 255, 0.185);
+}
 #timebox
 {  width:100vw;
     height:150px;
@@ -42,7 +45,7 @@ padding:5px;
 }
 canvas{
     margin:10px;
-    border:2px solid black;
+    border:5px solid rgb(3, 11, 255);
     height:400px;
     width:385px;
     
